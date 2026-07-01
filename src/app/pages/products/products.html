@@ -1,0 +1,8 @@
+<div class="text-center mt-10">
+    <h2 class="text-2xl font-semibold mb-4">Danh sách sản phẩm</h2>
+    <ul>
+        @for (product of products; track product) {
+        <li class="text-lg">{{ product }}</li>
+        }
+    </ul>
+</div>

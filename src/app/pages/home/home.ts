@@ -7,10 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './home.css',
 })
 export class Home {
-  name = 'Nguyen Van A';
-  age = 25;
 
-  handleClick() {
-    alert('Bạn đã click button');
-  }
 }
