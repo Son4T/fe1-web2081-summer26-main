@@ -1,13 +1,44 @@
-<div class="text-center mt-10">
-    <h2 class="text-2xl font-semibold mb-4">Danh sách sản phẩm</h2>
-    <ul>
-        @for (product of products; track product) {
-        <li class="text-lg">{{ product }}</li>
-        }
-    </ul>
+<h2>Danh sách sản phẩm</h2>
 
-    <a routerLink="/add-product"
-        class="text-blue-600 underline mt-4 inline-block">
-        + Thêm sản phẩm
-    </a>
-</div>
+@if (loading) {
+  <p>Đang tải dữ liệu...</p>
+}
+
+@if (error) {
+  <p style="color:red">Không thể tải dữ liệu</p>
+}
+
+@if (!loading && !error) {
+  <table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+      <th>ID</th>
+      <th>Tên sản phẩm</th>
+      <th>Giá</th>
+      <th>Danh mục</th>
+      <th>Hành động</th>
+    </tr>
+
+    @for (product of products; track product.id) {
+      <tr>
+        <td>{{ product.id }}</td>
+        <td>
+          {{ product.name }}
+          @if (product.views > 90000) {
+            <span class="hot-badge">HOT</span>
+          }
+        </td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.category }}</td>
+        <td>
+          <button
+            (click)="deleteProduct(product.id)"
+            [disabled]="deletingId === product.id">
+            {{ deletingId === product.id ? 'Đang xóa...' : 'Xóa' }}
+          </button>
+        </td>
+      </tr>
+    }
+  </table>
+
+  <a routerLink="/add-product" class="add-link">+ Thêm sản phẩm</a>
+}

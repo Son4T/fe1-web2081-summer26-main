@@ -1,4 +1,15 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+
+interface Story {
+  id: number;
+  title: string;
+  author: string;
+  views: number;
+  year: number;
+  genre: string;
+  image: string;
+}
 
 @Component({
   selector: "app-stories",
@@ -6,55 +17,50 @@ import { Component } from "@angular/core";
   templateUrl: "./stories.html",
   styleUrl: "./stories.css",
 })
-export class Stories {
-  stories = [
-    {
-      title: "One Piece",
-      author: "Oda",
-      views: 100000,
-      year: 1997,
-      genre: "Phiêu lưu",
-      image: "https://intomau.com/wp-content/uploads/2026/01/one-piece-anime-vietsub-8.jpg",
-    },
-    {
-      title: "Naruto",
-      author: "Kishimoto",
-      views: 90000,
-      year: 1999,
-      genre: "Hành động",
-      image: "https://tse3.mm.bing.net/th/id/OIP.YioXhSAOxOsLAYfxt1suqgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
-    },
-    {
-      title: "Doraemon",
-      author: "Fujiko F Fujio",
-      views: 70000,
-      year: 1969,
-      genre: "Thiếu nhi",
-      image: "https://tse1.mm.bing.net/th/id/OIP.zQsZRhQkaOLIx1d6CfeeugHaEo?w=1600&h=1000&rs=1&pid=ImgDetMain&o=7&rm=3",
-    },
-    {
-      title: "Dragon Ball",
-      author: "Toriyama",
-      views: 95000,
-      year: 1984,
-      genre: "Hành động",
-      image: "https://tse2.mm.bing.net/th/id/OIP.l6EFx6jbOlOckI2X0I0hNAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
-    },
-    {
-      title: "Attack On Titan",
-      author: "Isayama",
-      views: 92000,
-      year: 2009,
-      genre: "Kinh dị",
-      image: "https://tse4.mm.bing.net/th/id/OIP.GYsJekrIc7UrGqeJgFBd2AHaEG?rs=1&pid=ImgDetMain&o=7&rm=3",
-    },
-    {
-      title: "Bleach",
-      author: "Kubo",
-      views: 85000,
-      year: 2001,
-      genre: "Siêu nhiên",
-      image: "https://tse3.mm.bing.net/th/id/OIP.YliADex6y9ZhWvAv64WonQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
-    },
-  ];
+export class Stories implements OnInit {
+  stories: Story[] = [];
+  loading = false;
+  error = false;
+  deletingId: number | null = null;
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.getStories();
+  }
+
+  getStories() {
+    this.loading = true;
+    this.error = false;
+
+    this.http.get<Story[]>("http://localhost:3000/stories").subscribe({
+      next: (data) => {
+        this.stories = data;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = true;
+        this.loading = false;
+      },
+    });
+  }
+
+  deleteStory(id: number) {
+    const confirmDelete = confirm("Bạn có chắc muốn xóa không?");
+    if (!confirmDelete) return;
+
+    this.deletingId = id;
+
+    this.http.delete(`http://localhost:3000/stories/${id}`).subscribe({
+      next: () => {
+        this.stories = this.stories.filter((story) => story.id !== id);
+        this.deletingId = null;
+        alert("Xóa thành công");
+      },
+      error: () => {
+        this.deletingId = null;
+        alert("Xóa thất bại");
+      },
+    });
+  }
 }

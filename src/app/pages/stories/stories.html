@@ -1,49 +1,70 @@
-<h2 class="title">Danh sách truyện tranh</h2>
+<h2>Danh sách truyện tranh</h2>
+
+@if (loading) {
+<p>Đang tải dữ liệu...</p>
+}
+
+@if (error) {
+<p style="color:red">Không thể tải dữ liệu</p>
+}
+
+@if (!loading && !error) {
 
 @if (stories.length === 0) {
 <p>Không có truyện nào</p>
 } @else {
 
+<!-- Hiển thị dạng card: title, author, năm, thể loại, ảnh, HOT -->
 <div class="story-list">
-    @for (story of stories; track story.title) {
+    @for (story of stories; track story.id) {
     <div class="story-card">
-        <img [src]="story.image" [alt]="story.title">
-
+        <img [src]="story.image" [alt]="story.title" />
         <h3>{{ story.title }}</h3>
-
-        <p><strong>Tác giả:</strong> {{ story.author }}</p>
-        <p><strong>Năm phát hành:</strong> {{ story.year }}</p>
-        <p><strong>Thể loại:</strong> {{ story.genre }}</p>
-        <p><strong>Lượt xem:</strong> {{ story.views }}</p>
+        <p>Tác giả: {{ story.author }}</p>
+        <p>Năm phát hành: {{ story.year }}</p>
+        <p>Thể loại: {{ story.genre }}</p>
+        <p>Lượt xem: {{ story.views }}</p>
 
         @if (story.views > 90000) {
-        <p>🔥 HOT</p>
+        <span class="hot-badge">HOT</span>
         }
     </div>
     }
 </div>
 
-<h2 class="table-title">Bảng danh sách truyện tranh</h2>
-<table border="1">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Hình ảnh</th>
-            <th>Tên truyện</th>
-            <th>Tác giả</th>
-            <th>Lượt xem</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (story of stories; track story.title; let i = $index) {
-        <tr>
-            <td>{{ i + 1 }}</td>
-            <td><img [src]="story.image" [alt]="story.title" width="50" /></td>
-            <td>{{ story.title }}</td>
-            <td>{{ story.author }}</td>
-            <td>{{ story.views }}</td>
-        </tr>
-        }
-    </tbody>
+<!-- Hiển thị dạng bảng, có thêm cột Hành động để xóa -->
+<h2>Bảng danh sách truyện tranh</h2>
+<table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+        <th>STT</th>
+        <th>Hình ảnh</th>
+        <th>Tên truyện</th>
+        <th>Tác giả</th>
+        <th>Lượt xem</th>
+        <th>Hành động</th>
+    </tr>
+
+    @for (story of stories; track story.id; let i = $index) {
+    <tr>
+        <td>{{ i + 1 }}</td>
+        <td><img [src]="story.image" [alt]="story.title" width="50" /></td>
+        <td>
+            {{ story.title }}
+            @if (story.views > 90000) {
+            <span class="hot-badge">HOT</span>
+            }
+        </td>
+        <td>{{ story.author }}</td>
+        <td>{{ story.views }}</td>
+        <td>
+            <button
+                (click)="deleteStory(story.id)"
+                [disabled]="deletingId === story.id">
+                {{ deletingId === story.id ? 'Đang xóa...' : 'Xóa' }}
+            </button>
+        </td>
+    </tr>
+    }
 </table>
+}
 }

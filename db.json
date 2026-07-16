@@ -1,3 +1,81 @@
 {
-  "stories": []
+  "stories": [
+    {
+      "id": 1,
+      "title": "One Piece",
+      "author": "Eiichiro Oda",
+      "views": 100000,
+      "year": 1997,
+      "genre": "Phiêu lưu",
+      "image": "https://intomau.com/wp-content/uploads/2026/01/one-piece-anime-vietsub-8.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Naruto",
+      "author": "Masashi Kishimoto",
+      "views": 90000,
+      "year": 1999,
+      "genre": "Hành động",
+      "image": "https://tse3.mm.bing.net/th/id/OIP.YioXhSAOxOsLAYfxt1suqgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": 3,
+      "title": "Doraemon",
+      "author": "Fujiko F. Fujio",
+      "views": 70000,
+      "year": 1969,
+      "genre": "Thiếu nhi",
+      "image": "https://tse1.mm.bing.net/th/id/OIP.zQsZRhQkaOLIx1d6CfeeugHaEo?w=1600&h=1000&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": 4,
+      "title": "Dragon Ball",
+      "author": "Akira Toriyama",
+      "views": 95000,
+      "year": 1984,
+      "genre": "Hành động",
+      "image": "https://tse2.mm.bing.net/th/id/OIP.l6EFx6jbOlOckI2X0I0hNAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": 5,
+      "title": "Attack On Titan",
+      "author": "Hajime Isayama",
+      "views": 92000,
+      "year": 2009,
+      "genre": "Kinh dị",
+      "image": "https://tse4.mm.bing.net/th/id/OIP.GYsJekrIc7UrGqeJgFBd2AHaEG?rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": 6,
+      "title": "Bleach",
+      "author": "Tite Kubo",
+      "views": 85000,
+      "year": 2001,
+      "genre": "Siêu nhiên",
+      "image": "https://tse3.mm.bing.net/th/id/OIP.YliADex6y9ZhWvAv64WonQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Laptop",
+      "price": 15000000,
+      "category": "Điện tử",
+      "views": 95000
+    },
+    {
+      "id": 2,
+      "name": "Phone",
+      "price": 8000000,
+      "category": "Điện tử",
+      "views": 100000
+    },
+    {
+      "id": 3,
+      "name": "Tablet",
+      "price": 6000000,
+      "category": "Điện tử",
+      "views": 40000
+    }
+  ]
 }
