@@ -1,0 +1,35 @@
+<div class="form-wrapper">
+    <h2>Đăng ký tài khoản</h2>
+
+    <form [formGroup]="addForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" formControlName="username" />
+            @if (username?.invalid && username?.touched) {
+            <p class="error-msg">Username là bắt buộc</p>
+            }
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" formControlName="email" />
+            @if (email?.invalid && email?.touched) {
+            <p class="error-msg">Email không hợp lệ</p>
+            }
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" formControlName="password" />
+            @if (password?.invalid && password?.touched) {
+            <p class="error-msg">Password phải ít nhất 6 ký tự</p>
+            }
+        </div>
+
+        <button type="submit" [disabled]="addForm.invalid">Đăng ký</button>
+    </form>
+
+    @if (submitted) {
+    <p class="success-msg">✅ Đăng ký thành công!</p>
+    }
+</div>
