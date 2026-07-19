@@ -53,6 +53,12 @@
       "year": 2001,
       "genre": "Siêu nhiên",
       "image": "https://tse3.mm.bing.net/th/id/OIP.YliADex6y9ZhWvAv64WonQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "title": "Tiên nghịch",
+      "author": "Ankara",
+      "views": 97087,
+      "id": 7
     }
   ],
   "products": [
@@ -76,6 +82,11 @@
       "price": 6000000,
       "category": "Điện tử",
       "views": 40000
+    },
+    {
+      "name": "131",
+      "price": 13123,
+      "id": 4
     }
   ]
 }

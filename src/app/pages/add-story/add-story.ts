@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
-import { ProductService } from "../../services/product";
+import { StoryService } from "../../services/story";
 
 @Component({
-  selector: "app-add-product",
+  selector: "app-add-story",
   imports: [ReactiveFormsModule],
-  templateUrl: "./add-product.html",
-  styleUrl: "./add-product.css",
+  templateUrl: "./add-story.html",
+  styleUrl: "./add-story.css",
 })
-export class AddProduct {
+export class AddStory {
   addForm: FormGroup;
 
   loading = false;
@@ -17,20 +17,17 @@ export class AddProduct {
 
   constructor(
     private fb: FormBuilder,
-    private productService: ProductService,
+    private storyService: StoryService,
   ) {
     this.addForm = this.fb.group({
-      name: ["", Validators.required],
-      price: ["", [Validators.required, Validators.min(1)]],
+      title: ["", Validators.required],
+      author: "",
+      views: 0,
     });
   }
 
-  get name() {
-    return this.addForm.get("name");
-  }
-
-  get price() {
-    return this.addForm.get("price");
+  get title() {
+    return this.addForm.get("title");
   }
 
   submitForm() {
@@ -40,9 +37,9 @@ export class AddProduct {
 
     const data = this.addForm.value;
 
-    this.productService.create(data).subscribe({
+    this.storyService.create(data).subscribe({
       next: () => {
-        this.success = "Thêm sản phẩm thành công";
+        this.success = "Thêm truyện thành công";
         this.addForm.reset();
         this.loading = false;
       },
